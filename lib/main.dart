@@ -8,8 +8,14 @@ var dataTegangan = ["0", "0", "0", "0"];
 var dataSinyal = ["0", "0", "0", "0"];
 var dataArus = ["0", "0", "0", "0"];
 var dataServer = ["0", "0", "0"];
+var dataGangguan = [
+  "Gangguan Terdeteksi",
+  "Gangguan Terdeteksi",
+  "Gangguan Terdeteksi",
+  "Gangguan Terdeteksi"
+];
 
-var statushardware = ["false", "false", "false", "false"];
+var statushardware = ["Terputus", "Terputus", "Terputus", "Terputus"];
 
 final icons = [Icons.home];
 
@@ -129,28 +135,40 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _myListView(BuildContext context) {
-    if (statushardware[0] == "false") {
+    if (statushardware[0] == "Terputus") {
       dataSinyal[0] = "0";
       dataTegangan[0] = "0";
       dataArus[0] = "0";
+      dataGangguan[0] = "Gangguan Terdeteksi";
+    } else {
+      dataGangguan[0] = "Stabil";
     }
 
-    if (statushardware[1] == "false") {
+    if (statushardware[1] == "Terputus") {
       dataSinyal[1] = "0";
       dataTegangan[1] = "0";
       dataArus[1] = "0";
+      dataGangguan[1] = "Gangguan Terdeteksi";
+    } else {
+      dataGangguan[1] = "Stabil";
     }
 
-    if (statushardware[2] == "false") {
+    if (statushardware[2] == "Terputus") {
       dataSinyal[2] = "0";
       dataTegangan[2] = "0";
       dataArus[2] = "0";
+      dataGangguan[2] = "Gangguan Terdeteksi";
+    } else {
+      dataGangguan[2] = "Stabil";
     }
 
-    if (statushardware[3] == "false") {
+    if (statushardware[3] == "Terputus") {
       dataSinyal[3] = "0";
       dataTegangan[3] = "0";
       dataArus[3] = "0";
+      dataGangguan[3] = "Gangguan Terdeteksi";
+    } else {
+      dataGangguan[3] = "Stabil";
     }
     var dataMasuk = [
       "Sinyal: " +
@@ -161,7 +179,8 @@ class _HomePageState extends State<HomePage> {
           double.tryParse(dataTegangan[0]).toStringAsFixed(1).toString() +
           "V, Arus: " +
           double.tryParse(dataArus[0]).toStringAsFixed(1).toString() +
-          "A",
+          "A\nStatus : " +
+          dataGangguan[0],
       "Sinyal: " +
           double.tryParse(dataSinyal[1]).toStringAsFixed(1).toString() +
           "%, Koneksi: " +
@@ -170,7 +189,8 @@ class _HomePageState extends State<HomePage> {
           double.tryParse(dataTegangan[1]).toStringAsFixed(1).toString() +
           "V, Arus: " +
           double.tryParse(dataArus[1]).toStringAsFixed(1).toString() +
-          "A",
+          "A\nStatus : " +
+          dataGangguan[1],
       "Sinyal: " +
           double.tryParse(dataSinyal[2]).toStringAsFixed(1).toString() +
           "%, Koneksi: " +
@@ -179,7 +199,8 @@ class _HomePageState extends State<HomePage> {
           double.tryParse(dataTegangan[2]).toStringAsFixed(1).toString() +
           "V, Arus: " +
           double.tryParse(dataArus[2]).toStringAsFixed(1).toString() +
-          "A",
+          "A\nStatus : " +
+          dataGangguan[2],
       "Sinyal: " +
           double.tryParse(dataSinyal[3]).toStringAsFixed(1).toString() +
           "%, Koneksi: " +
@@ -188,7 +209,8 @@ class _HomePageState extends State<HomePage> {
           double.tryParse(dataTegangan[3]).toStringAsFixed(1).toString() +
           "V, Arus: " +
           double.tryParse(dataArus[3]).toStringAsFixed(1).toString() +
-          "A",
+          "A\nStatus : " +
+          dataGangguan[3],
     ];
     return ListView.builder(
       itemCount: titles.length,

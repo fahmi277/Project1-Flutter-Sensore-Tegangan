@@ -72,7 +72,12 @@ Future<String> statusDevices(int bangunan) async {
 
     print(dataBody);
     // print("object");
-    return dataBody.toString();
+    if (dataBody.toString() == "false") {
+      return "Terputus";
+    } else {
+      return "Tersambung";
+    }
+
     // dataReturn[1] = dataBody[0];
     // dataReturn[2] = bangunan;
     // dataReturn[3] = bangunan;
@@ -80,7 +85,7 @@ Future<String> statusDevices(int bangunan) async {
     // return dataBody[0].toString();
 
   } catch (e) {
-    return ("false");
+    return ("Terputus");
   }
 }
 
