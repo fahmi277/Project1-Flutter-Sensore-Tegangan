@@ -1,4 +1,4 @@
-# skripsi_sinyal_efendi
+# skripsi_sinyal_tegangan
 
 A new Flutter project.
 
