@@ -24,7 +24,16 @@ var statushardware = [
   "Terputus"
 ];
 
+var colorPos1 = Colors.red;
+var colorPos2 = Colors.red;
+var colorPos3 = Colors.red;
+var colorPos4 = Colors.red;
+var colorPos5 = Colors.red;
+
 final icons = [Icons.home];
+
+int timeGetData = 5; // satuan detik
+int timerUi = 5; //satuan detik
 
 void main() => runApp(HomePage());
 
@@ -35,7 +44,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   void startTimer() {
-    Timer timer = Timer.periodic(Duration(seconds: 15), (Timer _) async {
+    Timer timer =
+        Timer.periodic(Duration(seconds: timeGetData), (Timer _) async {
       statushardware[0] = await statusDevices(1);
       statushardware[1] = await statusDevices(2);
       statushardware[2] = await statusDevices(3);
@@ -64,7 +74,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   void timer1() {
-    Timer timer = Timer.periodic(Duration(seconds: 15), (Timer _) async {
+    Timer timer =
+        Timer.periodic(Duration(seconds: timeGetData), (Timer _) async {
       statushardware[0] = await statusDevices(1);
       dataTegangan[0] = await ambilData(1, "V0");
       dataArus[0] = await ambilData(1, "V1");
@@ -74,7 +85,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   void timer2() {
-    Timer timer = Timer.periodic(Duration(seconds: 15), (Timer _) async {
+    Timer timer =
+        Timer.periodic(Duration(seconds: timeGetData), (Timer _) async {
       print("timer 2");
       statushardware[1] = await statusDevices(2);
       dataTegangan[1] = await ambilData(2, "V0");
@@ -84,7 +96,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   void timer3() {
-    Timer timer = Timer.periodic(Duration(seconds: 15), (Timer _) async {
+    Timer timer =
+        Timer.periodic(Duration(seconds: timeGetData), (Timer _) async {
       statushardware[2] = await statusDevices(3);
       dataTegangan[2] = await ambilData(3, "V0");
       dataArus[2] = await ambilData(3, "V1");
@@ -93,7 +106,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   void timer4() {
-    Timer timer = Timer.periodic(Duration(seconds: 15), (Timer _) async {
+    Timer timer =
+        Timer.periodic(Duration(seconds: timeGetData), (Timer _) async {
       statushardware[3] = await statusDevices(4);
       dataTegangan[3] = await ambilData(4, "V0");
       dataArus[3] = await ambilData(4, "V1");
@@ -102,7 +116,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   void timer5() {
-    Timer timer = Timer.periodic(Duration(seconds: 15), (Timer _) async {
+    Timer timer =
+        Timer.periodic(Duration(seconds: timeGetData), (Timer _) async {
       statushardware[4] = await statusDevices(5);
       dataTegangan[4] = await ambilData(5, "V0");
       dataArus[4] = await ambilData(5, "V1");
@@ -111,7 +126,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void timerUI() {
-    Timer timer = Timer.periodic(Duration(seconds: 5), (Timer _) async {
+    Timer timer = Timer.periodic(Duration(seconds: timerUi), (Timer _) async {
       setState(() {});
     });
   }
@@ -194,11 +209,22 @@ class _HomePageState extends State<HomePage> {
       dataTegangan[0] = "0";
       dataArus[0] = "0";
       dataGangguan[0] = "Gangguan Terdeteksi";
+      colorPos1 = Colors.red;
     } else {
-      if (double.parse(dataSinyal[0]) < 30) {
-        dataGangguan[0] = "Sinyal Buruk";
-      } else {
-        dataGangguan[0] = "Stabil";
+      if (double.parse(dataTegangan[0]) >= 15) {
+        dataGangguan[0] = "Sangat Kuat";
+        colorPos1 = Colors.blue;
+      } else if (double.parse(dataTegangan[0]) < 15 &&
+          double.parse(dataTegangan[0]) > 10) {
+        dataGangguan[0] = "Kuat";
+        colorPos1 = Colors.green;
+      } else if (double.parse(dataTegangan[0]) <= 10 &&
+          double.parse(dataTegangan[0]) > 5) {
+        dataGangguan[0] = "Jelek";
+        colorPos1 = Colors.yellow;
+      } else if (double.parse(dataTegangan[0]) < 5) {
+        dataGangguan[0] = "Sangat Jelek";
+        colorPos1 = Colors.red;
       }
     }
 
@@ -207,11 +233,22 @@ class _HomePageState extends State<HomePage> {
       dataTegangan[1] = "0";
       dataArus[1] = "0";
       dataGangguan[1] = "Gangguan Terdeteksi";
+      colorPos2 = Colors.red;
     } else {
-      if (double.parse(dataSinyal[1]) < 30) {
-        dataGangguan[1] = "Sinyal Buruk";
-      } else {
-        dataGangguan[1] = "Stabil";
+      if (double.parse(dataTegangan[1]) >= 15) {
+        dataGangguan[1] = "Sangat Kuat";
+        colorPos2 = Colors.blue;
+      } else if (double.parse(dataTegangan[1]) < 15 &&
+          double.parse(dataTegangan[1]) > 10) {
+        dataGangguan[1] = "Kuat";
+        colorPos2 = Colors.green;
+      } else if (double.parse(dataTegangan[1]) <= 10 &&
+          double.parse(dataTegangan[1]) > 5) {
+        dataGangguan[1] = "Jelek";
+        colorPos2 = Colors.yellow;
+      } else if (double.parse(dataTegangan[1]) < 5) {
+        dataGangguan[1] = "Sangat Jelek";
+        colorPos2 = Colors.red;
       }
     }
 
@@ -220,11 +257,22 @@ class _HomePageState extends State<HomePage> {
       dataTegangan[2] = "0";
       dataArus[2] = "0";
       dataGangguan[2] = "Gangguan Terdeteksi";
+      colorPos3 = Colors.red;
     } else {
-      if (double.parse(dataSinyal[2]) < 30) {
-        dataGangguan[2] = "Sinyal Buruk";
-      } else {
-        dataGangguan[2] = "Stabil";
+      if (double.parse(dataTegangan[2]) >= 15) {
+        dataGangguan[2] = "Sangat Kuat";
+        colorPos3 = Colors.blue;
+      } else if (double.parse(dataTegangan[2]) < 15 &&
+          double.parse(dataTegangan[2]) > 10) {
+        dataGangguan[2] = "Kuat";
+        colorPos3 = Colors.green;
+      } else if (double.parse(dataTegangan[2]) <= 10 &&
+          double.parse(dataTegangan[2]) > 5) {
+        dataGangguan[2] = "Jelek";
+        colorPos3 = Colors.yellow;
+      } else if (double.parse(dataTegangan[2]) < 5) {
+        dataGangguan[2] = "Sangat Jelek";
+        colorPos3 = Colors.red;
       }
     }
 
@@ -233,11 +281,22 @@ class _HomePageState extends State<HomePage> {
       dataTegangan[3] = "0";
       dataArus[3] = "0";
       dataGangguan[3] = "Gangguan Terdeteksi";
+      colorPos4 = Colors.red;
     } else {
-      if (double.parse(dataSinyal[3]) < 30) {
-        dataGangguan[3] = "Sinyal Buruk";
-      } else {
-        dataGangguan[3] = "Stabil";
+      if (double.parse(dataTegangan[3]) >= 15) {
+        dataGangguan[3] = "Sangat Kuat";
+        colorPos4 = Colors.blue;
+      } else if (double.parse(dataTegangan[3]) < 15 &&
+          double.parse(dataTegangan[3]) > 10) {
+        dataGangguan[3] = "Kuat";
+        colorPos4 = Colors.green;
+      } else if (double.parse(dataTegangan[3]) <= 10 &&
+          double.parse(dataTegangan[3]) > 5) {
+        dataGangguan[3] = "Jelek";
+        colorPos4 = Colors.yellow;
+      } else if (double.parse(dataTegangan[3]) < 5) {
+        dataGangguan[3] = "Sangat Jelek";
+        colorPos4 = Colors.red;
       }
     }
 
@@ -246,74 +305,92 @@ class _HomePageState extends State<HomePage> {
       dataTegangan[4] = "0";
       dataArus[4] = "0";
       dataGangguan[4] = "Gangguan Terdeteksi";
+      print("4" + statushardware[4]);
+      colorPos5 = Colors.red;
     } else {
-      if (double.parse(dataSinyal[4]) < 30) {
-        dataGangguan[4] = "Sinyal Buruk";
-      } else {
-        dataGangguan[4] = "Stabil";
+      if (double.parse(dataTegangan[4]) >= 15) {
+        dataGangguan[4] = "Sangat Kuat";
+        colorPos5 = Colors.blue;
+      } else if (double.parse(dataTegangan[4]) < 15 &&
+          double.parse(dataTegangan[4]) > 10) {
+        dataGangguan[4] = "Kuat";
+        colorPos5 = Colors.green;
+      } else if (double.parse(dataTegangan[4]) <= 10 &&
+          double.parse(dataTegangan[4]) > 5) {
+        dataGangguan[4] = "Jelek";
+        colorPos5 = Colors.amber;
+      } else if (double.parse(dataTegangan[4]) <= 5) {
+        dataGangguan[4] = "Sangat Jelek";
+        colorPos5 = Colors.red;
       }
     }
     var dataMasuk = [
-      "Sinyal: " +
-          double.tryParse(dataSinyal[0]).toStringAsFixed(1).toString() +
-          "%, Koneksi: " +
+      "Sig : " +
+          dataGangguan[0] +
+          "\nKoneksi: " +
           statushardware[0] +
           "\nTegangan: " +
           double.tryParse(dataTegangan[0]).toStringAsFixed(1).toString() +
           "V, Arus: " +
           double.tryParse(dataArus[0]).toStringAsFixed(1).toString() +
-          "A\nStatus : " +
-          dataGangguan[0],
-      "Sinyal: " +
-          double.tryParse(dataSinyal[1]).toStringAsFixed(1).toString() +
-          "%, Koneksi: " +
+          "A",
+      "Sig : " +
+          dataGangguan[1] +
+          "\nKoneksi: " +
           statushardware[1] +
           "\nTegangan: " +
           double.tryParse(dataTegangan[1]).toStringAsFixed(1).toString() +
           "V, Arus: " +
           double.tryParse(dataArus[1]).toStringAsFixed(1).toString() +
-          "A\nStatus : " +
-          dataGangguan[1],
-      "Sinyal: " +
-          double.tryParse(dataSinyal[2]).toStringAsFixed(1).toString() +
-          "%, Koneksi: " +
+          "A",
+      "Sig : " +
+          dataGangguan[2] +
+          "\nKoneksi: " +
           statushardware[2] +
           "\nTegangan: " +
           double.tryParse(dataTegangan[2]).toStringAsFixed(1).toString() +
           "V, Arus: " +
           double.tryParse(dataArus[2]).toStringAsFixed(1).toString() +
-          "A\nStatus : " +
-          dataGangguan[2],
-      "Sinyal: " +
-          double.tryParse(dataSinyal[3]).toStringAsFixed(1).toString() +
-          "%, Koneksi: " +
+          "A",
+      "Sig : " +
+          dataGangguan[3] +
+          "\nKoneksi: " +
           statushardware[3] +
           "\nTegangan: " +
           double.tryParse(dataTegangan[3]).toStringAsFixed(1).toString() +
           "V, Arus: " +
           double.tryParse(dataArus[3]).toStringAsFixed(1).toString() +
-          "A\nStatus : " +
-          dataGangguan[3],
-      "Sinyal: " +
-          double.tryParse(dataSinyal[4]).toStringAsFixed(1).toString() +
-          "%, Koneksi: " +
+          "A",
+      "Sig : " +
+          dataGangguan[4] +
+          "\nKoneksi: " +
           statushardware[4] +
           "\nTegangan: " +
           double.tryParse(dataTegangan[4]).toStringAsFixed(1).toString() +
           "V, Arus: " +
           double.tryParse(dataArus[4]).toStringAsFixed(1).toString() +
-          "A\nStatus : " +
-          dataGangguan[4]
+          "A"
     ];
     return ListView.builder(
       itemCount: titles.length,
       itemBuilder: (context, index) {
         var warna = Colors.blue;
-        if (statushardware[index] == "Terputus") {
-          warna = Colors.red;
-        } else if (double.parse(dataSinyal[index]) < 30) {
-          warna = Colors.amber;
+        if (index == 0) {
+          warna = colorPos1;
+        } else if (index == 1) {
+          warna = colorPos2;
+        } else if (index == 2) {
+          warna = colorPos3;
+        } else if (index == 3) {
+          warna = colorPos4;
+        } else if (index == 4) {
+          warna = colorPos5;
         }
+        // if (statushardware[index] == "Terputus") {
+        //   warna = Colors.red;
+        // } else if (double.parse(dataSinyal[index]) < 30) {
+        //   warna = Colors.amber;
+        // }
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Card(

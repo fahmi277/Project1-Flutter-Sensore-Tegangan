@@ -6,7 +6,8 @@ import 'package:skripsi_sinyal_efendi/service/apiKey.dart';
 Future<String> ambilData(int bangunan, String pin) async {
   try {
     List dataReturn = List(4);
-    String base = "http://188.166.206.43/";
+    // String base = "http://188.166.206.43/";
+    String base = "http://iot.serangkota.go.id:8080/";
     String path = "/get/" + pin;
     String token = "";
 
@@ -20,9 +21,36 @@ Future<String> ambilData(int bangunan, String pin) async {
       token = getApiKey().sinyal4;
     } else if (bangunan == 5) {
       token = getApiKey().sinyal5;
+      // token = "4beYqnqVwxD_TnCbUwOUwaaGsDSaijct";
+      // base =
+      //     "http://iot.serangkota.go.id:8080/4beYqnqVwxD_TnCbUwOUwaaGsDSaijct/";
+      //http://iot.serangkota.go.id:8080/4beYqnqVwxD_TnCbUwOUwaaGsDSaijct/get/v0
     }
 
     String link = base + token + path;
+    // if (bangunan == 2) {
+    //   //6EILCYFYVCyWcRnmGMxbPnmfPt-ScN0m
+    //   link =
+    //       "http://iot.serangkota.go.id:8080/aGXcs1c6Ob2xGLn7vufez9KUJ-tnv-kW/get/" +
+    //           pin;
+    // }
+    // if (bangunan == 3) {
+    //   //6EILCYFYVCyWcRnmGMxbPnmfPt-ScN0m
+    //   link =
+    //       "http://iot.serangkota.go.id:8080/vcdX8OkpYetHpugQUw204Do25_vxO4yc/get/" +
+    //           pin;
+    // }
+    // if (bangunan == 4) {
+    //   //6EILCYFYVCyWcRnmGMxbPnmfPt-ScN0m
+    //   link =
+    //       "http://iot.serangkota.go.id:8080/6EILCYFYVCyWcRnmGMxbPnmfPt-ScN0m/get/" +
+    //           pin;
+    // }
+    // if (bangunan == 5) {
+    //   link =
+    //       "http://iot.serangkota.go.id:8080/4beYqnqVwxD_TnCbUwOUwaaGsDSaijct/get/" +
+    //           pin;
+    // }
 
     var respon_json_tegangan = await http
         .get(Uri.encodeFull(link), headers: {'accept': 'application/json'});
@@ -51,7 +79,8 @@ Future<String> statusDevices(int bangunan) async {
   try {
     // http://blynk-cloud.com/auth_token/isHardwareConnected
 
-    String base = "http://188.166.206.43/";
+    // String base = "http://188.166.206.43/";
+    String base = "http://iot.serangkota.go.id:8080/";
     String path = "/isHardwareConnected";
     String token = "";
 
@@ -69,18 +98,39 @@ Future<String> statusDevices(int bangunan) async {
     }
 
     String link = base + token + path;
+    // simyal4 6EILCYFYVCyWcRnmGMxbPnmfPt-ScN0m
 
-    if (bangunan == 2) {
-      print("disini");
-    }
+    // sinyal2 aGXcs1c6Ob2xGLn7vufez9KUJ-tnv-kW
+
+    //sinyal3
+
+    // if (bangunan == 2) {
+    //   link =
+    //       "http://iot.serangkota.go.id:8080/aGXcs1c6Ob2xGLn7vufez9KUJ-tnv-kW/isHardwareConnected";
+    // }
+
+    // if (bangunan == 3) {
+    //   link =
+    //       "http://iot.serangkota.go.id:8080/vcdX8OkpYetHpugQUw204Do25_vxO4yc/isHardwareConnected";
+    // }
+
+    // if (bangunan == 4) {
+    //   link =
+    //       "http://iot.serangkota.go.id:8080/6EILCYFYVCyWcRnmGMxbPnmfPt-ScN0m/isHardwareConnected";
+    // } else if (bangunan == 5) {
+    //   link =
+    //       "http://iot.serangkota.go.id:8080/4beYqnqVwxD_TnCbUwOUwaaGsDSaijct/isHardwareConnected";
+    // }
+    //http://iot.serangkota.go.id:8080/4beYqnqVwxD_TnCbUwOUwaaGsDSaijct/isHardwareConnected
+
+    // if (bangunan == 2) {
+    //   print("disini");
+    // }
     // print(link);
     var dataBody;
     int errorData = 0;
     var responJsonTegangan = await http.get(Uri.encodeFull(link));
 
-    if (bangunan == 2) {
-      print("disini1 : " + responJsonTegangan.toString());
-    }
     if (responJsonTegangan.toString() != "") {
       dataBody = jsonDecode(responJsonTegangan.body);
     } else {
